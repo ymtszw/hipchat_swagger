@@ -43,12 +43,6 @@ paths:
       parameters:
         - name: draft
           in: query
-          description: |
-            The json-schema draft version to use
-
-            Valid values: v2, v4.
-
-            Defaults to 'v4'.
           required: false
           type: string
           enum:
@@ -67,15 +61,18 @@ paths:
       description: |
         Get emoticon details.
 
-        Authentication required, with scope `view_group`.
+        Authentication required, with scope view_group.
 
         Accessible by group clients, room clients, users.
 
         https://www.hipchat.com/docs/apiv2/method/get_emoticon
       parameters:
+        - name: Authorization
+          in: header
+          type: string
+          required: true
         - name: emoticon_id_or_key
           in: path
-          description: The id or shortcut of the emoticon
           required: true
           type: string
       tags:
@@ -91,38 +88,26 @@ paths:
       description: |
         Gets all emoticons for the current group
 
-        Authentication required, with scope `view_group`.
+        Authentication required, with scope view_group.
 
         Accessible by group clients, room clients, users.
 
         https://www.hipchat.com/docs/apiv2/method/get_all_emoticons
       parameters:
+        - name: Authorization
+          in: header
+          type: string
+          required: true
         - name: start-index
           in: query
-          description: |
-            The start index for the result set
-
-            Defaults to 0.
           type: integer
           required: false
         - name: max-results
           in: query
-          description: |
-            The maximum number of results.
-
-            Valid length range: 0 - 1000.
-
-            Defaults to 100.
           type: integer
           required: false
         - name: type
           in: query
-          description: |
-            The type of emoticons to get
-
-            Valid values: global, group, all.
-
-            Defaults to 'all'.
           type: string
           enum:
             - global
@@ -148,12 +133,12 @@ paths:
 
         https://www.hipchat.com/docs/apiv2/method/get_global_action
       parameters:
+        - name: Authorization
+          in: header
+          type: string
+          required: true
         - name: key
           in: path
-          description: |
-            Unique key (in the context of the integration) to identify this action.
-
-            Valid length range: 1 - 40.
           type: string
           required: true
       tags:
@@ -179,16 +164,17 @@ paths:
 
         https://www.hipchat.com/docs/apiv2/method/create_global_action
       parameters:
+        - name: Authorization
+          in: header
+          type: string
+          required: true
         - name: key
           in: path
-          description: |
-            Unique key (in the context of the integration) to identify this action.
-
-            Valid length range: 1 - 40.
           type: string
           required: true
         - name: body
           in: body
+          required: true
           schema:
             type: object
             required:
@@ -211,7 +197,6 @@ paths:
                   type: object
               name:
                 type: object
-          required: true
       tags:
         - Extensions
       responses:
@@ -230,6 +215,10 @@ paths:
 
         https://www.hipchat.com/docs/apiv2/method/delete_global_action
       parameters:
+        - name: Authorization
+          in: header
+          type: string
+          required: true
         - name: key
           in: path
           type: string
@@ -239,3 +228,50 @@ paths:
       responses:
         204:
           description: Global action deleted
+  /room/{room_id_or_name}/notification:
+    post:
+      summary: Send room notification
+      description: |
+        Send a message to a room with JSON payload. Other content-types are not included.
+
+        Authentication required, with scope send_notification.
+
+        Accessible by group clients, room clients, users.
+
+        https://www.hipchat.com/docs/apiv2/method/send_room_notification
+      parameters:
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+        - name: room_id_or_name
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - message
+            properties:
+              from:
+                type: string
+              message_format:
+                type: string
+              color:
+                type: string
+              attach_to:
+                type: string
+              notify:
+                type: boolean
+              message:
+                type: string
+              card:
+                type: object
+      tags:
+        - Rooms
+      responses:
+        204:
+          description: Room notification sent
