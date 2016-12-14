@@ -1,0 +1,250 @@
+# Written in Swagger-editor
+swagger: "2.0"
+info:
+  title: HipChat API v2
+  description: |
+    HipChat APIv2 specification in Swagger YAML,
+    hand-exported from [official doc](https://www.hipchat.com/docs/apiv2).
+
+    Policies:
+
+    - Meant to be used in generating client libraries
+    - Not all of aspects are covered. Especially, many schema information are purposefully omitted.
+        - Simply lacking efforts on my side. HipChat API docs are large and fine-grained.
+        - Relying on HipChat-cloud/server's request validations, so that always latest and accurate validations can be applied.
+            - If we try to apply client-side validations, we have to be very accurate about it, and must actively catch up on HipChat's API update, which we cannot easily afford to.
+    - Always welcoming helps to improve this file.
+        - And I myself actually hope HipChat developers generously provide this type of structured spec file.
+        - From the looks of API docs, I believe they already have this kind of centralized spec file(s) internally. Publishing them for third parties would be really cool.
+  version: "2.0.0"
+host: api.hipchat.com
+schemes:
+  - https
+basePath: /v2
+produces:
+  - application/json
+paths:
+  /capabilities:
+    get:
+      summary: Get Capabilities
+      description: |
+        Gets the capabilities descriptor for HipChat
+
+        Authentication not required.
+
+        https://www.hipchat.com/docs/apiv2/method/get_capabilities
+      tags:
+        - Capabilities
+      responses:
+        200:
+          description: Capabilities
+          schema:
+            type: object
+  /capabilities/addon/schema:
+    get:
+      summary: Get addon capabilities schema
+      description: |
+        Gets the addon capabilities descriptor schema
+
+        Authentication not required.
+
+        https://www.hipchat.com/docs/apiv2/method/get_addon_capabilities_schema
+      parameters:
+        - name: draft
+          in: query
+          description: |
+            The json-schema draft version to use
+
+            Valid values: v2, v4.
+
+            Defaults to 'v4'.
+          required: false
+          type: string
+          enum:
+            - v2
+            - v4
+      tags:
+        - Capabilities
+      responses:
+        200:
+          description: Addon capabilities schema
+          schema:
+            type: object # The response from this API itself is a JSON schema
+  /emoticon/{emoticon_id_or_key}:
+    get:
+      summary: Get emoticon
+      description: |
+        Get emoticon details.
+
+        Authentication required, with scope `view_group`.
+
+        Accessible by group clients, room clients, users.
+
+        https://www.hipchat.com/docs/apiv2/method/get_emoticon
+      parameters:
+        - name: emoticon_id_or_key
+          in: path
+          description: The id or shortcut of the emoticon
+          required: true
+          type: string
+      tags:
+        - Emoticons
+      responses:
+        200:
+          description: Emoticon
+          schema:
+            type: object
+  /emoticon:
+    get:
+      summary: Get all emoticons
+      description: |
+        Gets all emoticons for the current group
+
+        Authentication required, with scope `view_group`.
+
+        Accessible by group clients, room clients, users.
+
+        https://www.hipchat.com/docs/apiv2/method/get_all_emoticons
+      parameters:
+        - name: start-index
+          in: query
+          description: |
+            The start index for the result set
+
+            Defaults to 0.
+          type: integer
+          required: false
+        - name: max-results
+          in: query
+          description: |
+            The maximum number of results.
+
+            Valid length range: 0 - 1000.
+
+            Defaults to 100.
+          type: integer
+          required: false
+        - name: type
+          in: query
+          description: |
+            The type of emoticons to get
+
+            Valid values: global, group, all.
+
+            Defaults to 'all'.
+          type: string
+          enum:
+            - global
+            - group
+            - all
+          required: false
+      tags:
+        - Emoticons
+      responses:
+        200:
+          description: Emoticons
+          schema:
+            type: object
+  /extension/action/{key}:
+    get:
+      summary: Get global action
+      description: |
+        Retrieve a global action.
+
+        Authentication required.
+
+        Accessible by group clients.
+
+        https://www.hipchat.com/docs/apiv2/method/get_global_action
+      parameters:
+        - name: key
+          in: path
+          description: |
+            Unique key (in the context of the integration) to identify this action.
+
+            Valid length range: 1 - 40.
+          type: string
+          required: true
+      tags:
+        - Extensions
+      responses:
+        200:
+          description: Global action
+          schema:
+            type: object
+    put:
+      summary: Create global action
+      description: |
+        Create a global action.
+
+        Dynamically created actions have the following restrictions:
+
+        - You can only create 10 global actions
+        - You cannot modify an action that was declared in the descriptor
+
+        Authentication required.
+
+        Accessible by group clients.
+
+        https://www.hipchat.com/docs/apiv2/method/create_global_action
+      parameters:
+        - name: key
+          in: path
+          description: |
+            Unique key (in the context of the integration) to identify this action.
+
+            Valid length range: 1 - 40.
+          type: string
+          required: true
+        - name: body
+          in: body
+          schema:
+            type: object
+            required:
+              - target
+              - location
+              - key
+              - name
+            properties:
+              target:
+                type: object
+              weight:
+                type: integer
+              location:
+                type: string
+              key:
+                type: string
+              conditions:
+                type: array
+                items:
+                  type: object
+              name:
+                type: object
+          required: true
+      tags:
+        - Extensions
+      responses:
+        201:
+          description: Global action created
+          schema:
+            type: object
+    delete:
+      summary: Delete global action
+      description: |
+        Delete a global action. You cannot delete an action which was declared in the descriptor.
+
+        Authentication required.
+
+        Accessible by group clients.
+
+        https://www.hipchat.com/docs/apiv2/method/delete_global_action
+      parameters:
+        - name: key
+          in: path
+          type: string
+          required: true
+      tags:
+        - Extensions
+      responses:
+        204:
+          description: Global action deleted
