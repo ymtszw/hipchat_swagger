@@ -31,7 +31,7 @@ Mostly I am constructing API spec YAML using online [Swagger Editor](http://edit
 - As I mostly developing with online editor, files should be valid Swagger 2.0 specifications.
 - You can just clone or submodule this repository, and import spec files for code generations, either using:
     - [Swagger Codegen](http://swagger.io/swagger-codegen/) for your favorite languages and/or frameworks
-    - You own parser/code generator
+    - Your own parser/code generator
 
 # License
 

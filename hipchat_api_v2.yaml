@@ -4,18 +4,9 @@ info:
   title: HipChat API v2
   description: |
     HipChat APIv2 specification in Swagger YAML,
-    hand-exported from [official doc](https://www.hipchat.com/docs/apiv2).
+    mostly hand-exported from [official doc](https://www.hipchat.com/docs/apiv2).
 
-    Policies:
-
-    - Meant to be used in generating client libraries
-    - Not all of aspects are covered. Especially, many schema information are purposefully omitted.
-        - Simply lacking efforts on my side. HipChat API docs are large and fine-grained.
-        - Relying on HipChat-cloud/server's request validations, so that always latest and accurate validations can be applied.
-            - If we try to apply client-side validations, we have to be very accurate about it, and must actively catch up on HipChat's API update, which we cannot easily afford to.
-    - Always welcoming helps to improve this file.
-        - And I myself actually hope HipChat developers generously provide this type of structured spec file.
-        - From the looks of API docs, I believe they already have this kind of centralized spec file(s) internally. Publishing them for third parties would be really cool.
+    See [the repository](https://github.com/ymtszw/hipchat_swagger) for development details and policies.
   version: "2.0.0"
 host: api.hipchat.com
 schemes:
