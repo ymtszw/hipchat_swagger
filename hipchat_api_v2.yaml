@@ -7,7 +7,7 @@ info:
     mostly hand-exported from [official doc](https://www.hipchat.com/docs/apiv2).
 
     See [the repository](https://github.com/ymtszw/hipchat_swagger) for development details and policies.
-  version: "2.0.0"
+  version: "v2"
 host: api.hipchat.com
 schemes:
   - https
