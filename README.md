@@ -1,4 +1,4 @@
-# HipChat Swagger
+# hipchat_swagger
 
 HipChat API specifications written in [Swagger](http://swagger.io/) YAML.
 
@@ -29,6 +29,7 @@ Mostly I am constructing API spec YAML using online [Swagger Editor](http://edit
 - You can just clone or submodule this repository, and import spec files for code generations, either using:
     - [Swagger Codegen](http://swagger.io/swagger-codegen/) for your favorite languages and/or frameworks
     - Your own parser/code generator
+        - Example: [ymtszw/hipchat_elixir](https://github.com/ymtszw/hipchat_elixir)
 
 # License
 
