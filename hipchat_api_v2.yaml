@@ -275,3 +275,122 @@ paths:
       responses:
         204:
           description: Room notification sent
+  /group/{group_id}:
+    get:
+      summary: Get group # `View group` in the doc
+      description: |
+        Get a group's details.
+
+        Authentication required, with scope view_group.
+
+        Accessible by group clients, users.
+
+        https://www.hipchat.com/docs/apiv2/method/view_group
+      parameters:
+        - name: group_id
+          in: path
+          type: string
+          required: true
+      tags:
+        - Groups
+      responses:
+        200:
+          description: Group
+          schema:
+            type: object
+  /group/{group_id}/avatar:
+    get:
+      summary: Get group avatar
+      description: |
+        Gets a group avatar
+
+        Authentication required, with scope view_group.
+
+        Accessible by group clients, users.
+
+        https://www.hipchat.com/docs/apiv2/method/get_group_avatar
+      parameters:
+        - name: group_id
+          in: path
+          type: string
+          required: true
+      tags:
+        - Groups
+      responses:
+        302:
+          description: Redirect to group avatar
+    put:
+      summary: Update group avatar
+      description: |
+        Update a group avatar.
+
+        Accepted image types are JPEG, PNG and GIF.
+        Must be included in `avatar` field of request body, as base64 encoded string.
+
+        Authentication required, with scope admin_group.
+
+        Accessible by group clients, users.
+
+        https://www.hipchat.com/docs/apiv2/method/update_group_avatar
+      parameters:
+        - name: group_id
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          required: true
+          schema:
+            required:
+              - avatar
+            properties:
+              avatar:
+                type: string
+      tags:
+        - Groups
+      responses:
+        204:
+          description: Group avatar updated
+    delete:
+      summary: Delete group avatar
+      description: |
+        Delete group avatar.
+
+        Authentication required, with scope admin_group.
+
+        Accessible by group clients, users.
+
+        https://www.hipchat.com/docs/apiv2/method/delete_group_avatar
+      parameters:
+        - name: group_id
+          in: path
+          type: string
+          required: true
+      tags:
+        - Groups
+      responses:
+        204:
+          description: Group avatar deleted
+  /group/{group_id}/statistics:
+    get:
+      summary: Get group statistics # `Group statistics` in the doc
+      description: |
+        Get a group's details.
+
+        Authentication required, with scope view_group.
+
+        Accessible by group clients, users.
+
+        https://www.hipchat.com/docs/apiv2/method/group_statistics
+      parameters:
+        - name: group_id
+          in: path
+          type: string
+          required: true
+      tags:
+        - Groups
+      responses:
+        200:
+          description: Group statistics
+          schema:
+            type: object
