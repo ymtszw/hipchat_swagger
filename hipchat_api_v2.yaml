@@ -15,6 +15,7 @@ basePath: /v2
 produces:
   - application/json
 paths:
+  # Capabilities API
   /capabilities:
     get:
       summary: Get Capabilities
@@ -35,7 +36,7 @@ paths:
     get:
       summary: Get addon capabilities schema
       description: |
-        Gets the addon capabilities descriptor schema
+        Gets the addon capabilities descriptor schema (JSON schema)
 
         Authentication not required.
 
@@ -54,7 +55,8 @@ paths:
         200:
           description: Addon capabilities schema
           schema:
-            type: object # The response from this API itself is a JSON schema
+            type: object
+  # Emoticons API
   /emoticon/{emoticon_id_or_key}:
     get:
       summary: Get emoticon
@@ -67,10 +69,6 @@ paths:
 
         https://www.hipchat.com/docs/apiv2/method/get_emoticon
       parameters:
-        - name: Authorization
-          in: header
-          type: string
-          required: true
         - name: emoticon_id_or_key
           in: path
           required: true
@@ -94,10 +92,6 @@ paths:
 
         https://www.hipchat.com/docs/apiv2/method/get_all_emoticons
       parameters:
-        - name: Authorization
-          in: header
-          type: string
-          required: true
         - name: start-index
           in: query
           type: integer
@@ -121,6 +115,7 @@ paths:
           description: Emoticons
           schema:
             type: object
+  # Extensions API
   /extension/action/{key}:
     get:
       summary: Get global action
@@ -133,10 +128,6 @@ paths:
 
         https://www.hipchat.com/docs/apiv2/method/get_global_action
       parameters:
-        - name: Authorization
-          in: header
-          type: string
-          required: true
         - name: key
           in: path
           type: string
@@ -164,10 +155,6 @@ paths:
 
         https://www.hipchat.com/docs/apiv2/method/create_global_action
       parameters:
-        - name: Authorization
-          in: header
-          type: string
-          required: true
         - name: key
           in: path
           type: string
@@ -215,10 +202,6 @@ paths:
 
         https://www.hipchat.com/docs/apiv2/method/delete_global_action
       parameters:
-        - name: Authorization
-          in: header
-          type: string
-          required: true
         - name: key
           in: path
           type: string
@@ -228,53 +211,7 @@ paths:
       responses:
         204:
           description: Global action deleted
-  /room/{room_id_or_name}/notification:
-    post:
-      summary: Send room notification
-      description: |
-        Send a message to a room with JSON payload. Other content-types are not included.
-
-        Authentication required, with scope send_notification.
-
-        Accessible by group clients, room clients, users.
-
-        https://www.hipchat.com/docs/apiv2/method/send_room_notification
-      parameters:
-        - name: Authorization
-          in: header
-          type: string
-          required: true
-        - name: room_id_or_name
-          in: path
-          type: string
-          required: true
-        - name: body
-          in: body
-          required: true
-          schema:
-            type: object
-            required:
-              - message
-            properties:
-              from:
-                type: string
-              message_format:
-                type: string
-              color:
-                type: string
-              attach_to:
-                type: string
-              notify:
-                type: boolean
-              message:
-                type: string
-              card:
-                type: object
-      tags:
-        - Rooms
-      responses:
-        204:
-          description: Room notification sent
+# Groups API
   /group/{group_id}:
     get:
       summary: Get group # `View group` in the doc
@@ -392,5 +329,119 @@ paths:
       responses:
         200:
           description: Group statistics
+          schema:
+            type: object
+  # Invites API
+  /invite/user:
+    post:
+      summary: Invite user to group
+      description: |
+        Invites a user to join a group.
+
+        Authentication required, with scope admin_group.
+
+        Accessible by group clients, users.
+
+        https://www.hipchat.com/docs/apiv2/method/invite_user_to_group
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            required:
+              - email
+              - name
+            properties:
+              email:
+                type: string
+              name:
+                type: string
+              title:
+                type: string
+      tags:
+        - Invites
+      responses:
+        200:
+          description: Used invited to group
+          schema:
+            type: object
+  # Rooms API
+  /room/{room_id_or_name}/notification:
+    post:
+      summary: Send room notification
+      description: |
+        Send a message to a room with JSON payload. Other content-types are not included.
+
+        Authentication required, with scope send_notification.
+
+        Accessible by group clients, room clients, users.
+
+        https://www.hipchat.com/docs/apiv2/method/send_room_notification
+      parameters:
+        - name: room_id_or_name
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - message
+            properties:
+              from:
+                type: string
+              message_format:
+                type: string
+              color:
+                type: string
+              attach_to:
+                type: string
+              notify:
+                type: boolean
+              message:
+                type: string
+              card:
+                type: object
+      tags:
+        - Rooms
+      responses:
+        204:
+          description: Room notification sent
+  # Users API
+  /user:
+    get:
+      summary: Get all users
+      description: |
+        List all users in the group.
+
+        Authentication required, with scope view_group.
+
+        Accessible by group clients, users.
+
+        https://www.hipchat.com/docs/apiv2/method/get_all_users
+      parameters:
+        - name: start-index
+          in: query
+          type: integer
+          required: false
+        - name: max-results
+          in: query
+          type: integer
+          required: false
+        - name: include-guests
+          in: query
+          type: boolean
+          required: false
+        - name: include-deleted
+          in: query
+          type: boolean
+          required: false
+      tags:
+        - Users
+      responses:
+        200:
+          description: All users
           schema:
             type: object

@@ -18,13 +18,10 @@ Mostly I am constructing API spec YAML using online [Swagger Editor](http://edit
 - Meant to be used in generating client libraries.
 - Not all of API aspects are covered. Especially, many schema information are purposefully omitted.
     - Simply lacking efforts on my side. HipChat API docs are large and fine-grained.
-    - Relying on HipChat cloud/server's request validations, so that always latest and accurate validations can be applied.
+    - Intending to rely on HipChat cloud/server's request validations, so that always latest and accurate validations can be applied.
         - If we try to apply client-side validations, we have to be very accurate about it,
           and must actively catch up on HipChat's API updates, which we cannot easily afford to.
 - Always welcoming helps.
-    - And I actually hope HipChat developers generously provide this type of structured spec file.
-    - From the looks of API docs, I believe they already have this kind of centralized spec file(s) internally.
-      Publishing them for third parties would be really cool!
 
 # Usage
 
