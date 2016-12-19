@@ -19,12 +19,7 @@ paths:
   /capabilities:
     get:
       summary: Get Capabilities
-      description: |
-        Gets the capabilities descriptor for HipChat
-
-        Authentication not required.
-
-        https://www.hipchat.com/docs/apiv2/method/get_capabilities
+      description: https://www.hipchat.com/docs/apiv2/method/get_capabilities
       tags:
         - Capabilities
       responses:
@@ -35,12 +30,7 @@ paths:
   /capabilities/addon/schema:
     get:
       summary: Get addon capabilities schema
-      description: |
-        Gets the addon capabilities descriptor schema (JSON schema)
-
-        Authentication not required.
-
-        https://www.hipchat.com/docs/apiv2/method/get_addon_capabilities_schema
+      description: https://www.hipchat.com/docs/apiv2/method/get_addon_capabilities_schema
       parameters:
         - name: draft
           in: query
@@ -60,14 +50,7 @@ paths:
   /emoticon/{emoticon_id_or_key}:
     get:
       summary: Get emoticon
-      description: |
-        Get emoticon details.
-
-        Authentication required, with scope view_group.
-
-        Accessible by group clients, room clients, users.
-
-        https://www.hipchat.com/docs/apiv2/method/get_emoticon
+      description: https://www.hipchat.com/docs/apiv2/method/get_emoticon
       parameters:
         - name: emoticon_id_or_key
           in: path
@@ -83,14 +66,7 @@ paths:
   /emoticon:
     get:
       summary: Get all emoticons
-      description: |
-        Gets all emoticons for the current group
-
-        Authentication required, with scope view_group.
-
-        Accessible by group clients, room clients, users.
-
-        https://www.hipchat.com/docs/apiv2/method/get_all_emoticons
+      description: https://www.hipchat.com/docs/apiv2/method/get_all_emoticons
       parameters:
         - name: start-index
           in: query
@@ -119,14 +95,7 @@ paths:
   /extension/action/{key}:
     get:
       summary: Get global action
-      description: |
-        Retrieve a global action.
-
-        Authentication required.
-
-        Accessible by group clients.
-
-        https://www.hipchat.com/docs/apiv2/method/get_global_action
+      description: https://www.hipchat.com/docs/apiv2/method/get_global_action
       parameters:
         - name: key
           in: path
@@ -141,19 +110,7 @@ paths:
             type: object
     put:
       summary: Create global action
-      description: |
-        Create a global action.
-
-        Dynamically created actions have the following restrictions:
-
-        - You can only create 10 global actions
-        - You cannot modify an action that was declared in the descriptor
-
-        Authentication required.
-
-        Accessible by group clients.
-
-        https://www.hipchat.com/docs/apiv2/method/create_global_action
+      description: https://www.hipchat.com/docs/apiv2/method/create_global_action
       parameters:
         - name: key
           in: path
@@ -193,14 +150,7 @@ paths:
             type: object
     delete:
       summary: Delete global action
-      description: |
-        Delete a global action. You cannot delete an action which was declared in the descriptor.
-
-        Authentication required.
-
-        Accessible by group clients.
-
-        https://www.hipchat.com/docs/apiv2/method/delete_global_action
+      description: https://www.hipchat.com/docs/apiv2/method/delete_global_action
       parameters:
         - name: key
           in: path
@@ -211,18 +161,11 @@ paths:
       responses:
         204:
           description: Global action deleted
-# Groups API
+  # Groups API
   /group/{group_id}:
     get:
       summary: Get group # `View group` in the doc
-      description: |
-        Get a group's details.
-
-        Authentication required, with scope view_group.
-
-        Accessible by group clients, users.
-
-        https://www.hipchat.com/docs/apiv2/method/view_group
+      description: https://www.hipchat.com/docs/apiv2/method/view_group
       parameters:
         - name: group_id
           in: path
@@ -238,14 +181,7 @@ paths:
   /group/{group_id}/avatar:
     get:
       summary: Get group avatar
-      description: |
-        Gets a group avatar
-
-        Authentication required, with scope view_group.
-
-        Accessible by group clients, users.
-
-        https://www.hipchat.com/docs/apiv2/method/get_group_avatar
+      description: https://www.hipchat.com/docs/apiv2/method/get_group_avatar
       parameters:
         - name: group_id
           in: path
@@ -258,17 +194,7 @@ paths:
           description: Redirect to group avatar
     put:
       summary: Update group avatar
-      description: |
-        Update a group avatar.
-
-        Accepted image types are JPEG, PNG and GIF.
-        Must be included in `avatar` field of request body, as base64 encoded string.
-
-        Authentication required, with scope admin_group.
-
-        Accessible by group clients, users.
-
-        https://www.hipchat.com/docs/apiv2/method/update_group_avatar
+      description: https://www.hipchat.com/docs/apiv2/method/update_group_avatar
       parameters:
         - name: group_id
           in: path
@@ -290,14 +216,7 @@ paths:
           description: Group avatar updated
     delete:
       summary: Delete group avatar
-      description: |
-        Delete group avatar.
-
-        Authentication required, with scope admin_group.
-
-        Accessible by group clients, users.
-
-        https://www.hipchat.com/docs/apiv2/method/delete_group_avatar
+      description: https://www.hipchat.com/docs/apiv2/method/delete_group_avatar
       parameters:
         - name: group_id
           in: path
@@ -311,14 +230,7 @@ paths:
   /group/{group_id}/statistics:
     get:
       summary: Get group statistics # `Group statistics` in the doc
-      description: |
-        Get a group's details.
-
-        Authentication required, with scope view_group.
-
-        Accessible by group clients, users.
-
-        https://www.hipchat.com/docs/apiv2/method/group_statistics
+      description: https://www.hipchat.com/docs/apiv2/method/group_statistics
       parameters:
         - name: group_id
           in: path
@@ -335,14 +247,7 @@ paths:
   /invite/user:
     post:
       summary: Invite user to group
-      description: |
-        Invites a user to join a group.
-
-        Authentication required, with scope admin_group.
-
-        Accessible by group clients, users.
-
-        https://www.hipchat.com/docs/apiv2/method/invite_user_to_group
+      description: https://www.hipchat.com/docs/apiv2/method/invite_user_to_group
       parameters:
         - name: body
           in: body
@@ -369,14 +274,7 @@ paths:
   /room/{room_id_or_name}/notification:
     post:
       summary: Send room notification
-      description: |
-        Send a message to a room with JSON payload. Other content-types are not included.
-
-        Authentication required, with scope send_notification.
-
-        Accessible by group clients, room clients, users.
-
-        https://www.hipchat.com/docs/apiv2/method/send_room_notification
+      description: https://www.hipchat.com/docs/apiv2/method/send_room_notification
       parameters:
         - name: room_id_or_name
           in: path
@@ -413,14 +311,7 @@ paths:
   /user:
     get:
       summary: Get all users
-      description: |
-        List all users in the group.
-
-        Authentication required, with scope view_group.
-
-        Accessible by group clients, users.
-
-        https://www.hipchat.com/docs/apiv2/method/get_all_users
+      description: https://www.hipchat.com/docs/apiv2/method/get_all_users
       parameters:
         - name: start-index
           in: query
