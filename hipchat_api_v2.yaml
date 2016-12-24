@@ -267,7 +267,83 @@ paths:
         - Invites
       responses:
         200:
-          description: Used invited to group
+          description: User invited to group
+          schema:
+            type: object
+  # OAuth Sessions API
+  /oauth/token/{access_token}:
+    get:
+      summary: Get session
+      description: https://www.hipchat.com/docs/apiv2/method/get_session
+      parameters:
+        - name: access_token
+          in: path
+          type: string
+          required: true
+      tags:
+        - Oauth Sessions
+      responses:
+        200:
+          description: OAuth session
+          schema:
+            type: object
+    delete:
+      summary: Delete session
+      description: https://www.hipchat.com/docs/apiv2/method/delete_session
+      parameters:
+        - name: access_token
+          in: path
+          type: string
+          required: true
+      tags:
+        - Oauth Sessions
+      responses:
+        204:
+          description: OAuth session deleted
+  /oauth/token:
+    post:
+      summary: Generate token
+      description: https://www.hipchat.com/docs/apiv2/method/generate_token
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            required:
+              - grant_type
+            properties:
+              username:
+                type: string
+              grant_type:
+                type: string
+                enum:
+                  - authorization_code
+                  - refresh_token
+                  - password
+                  - client_credentials
+                  - personal
+                  - room_notification
+              user_id:
+                type: string
+              code:
+                type: string
+              client_name:
+                type: string
+              redirect_url:
+                type: string
+              scope:
+                type: string
+              password:
+                type: string
+              group_id:
+                type: string
+              refresh_token:
+                type: string
+      tags:
+        - Oauth Sessions
+      responses:
+        200:
+          description: Token generated
           schema:
             type: object
   # Rooms API
