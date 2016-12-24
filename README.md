@@ -31,6 +31,19 @@ Mostly I am constructing API spec YAML using online [Swagger Editor](http://edit
     - Your own parser/code generator
         - Example: [ymtszw/hipchat_elixir](https://github.com/ymtszw/hipchat_elixir)
 
+# Coverage
+
+- [x] [Capabilities API](https://www.hipchat.com/docs/apiv2/method/get_capabilities)
+- [x] [Emoticons API](https://www.hipchat.com/docs/apiv2/method/get_emoticon)
+- [ ] [Extensions API](https://www.hipchat.com/docs/apiv2/method/get_global_action)
+- [x] [Groups API](https://www.hipchat.com/docs/apiv2/method/view_group)
+- [ ] [Integrations API](https://www.hipchat.com/docs/apiv2/method/get_integration_installable_data)
+- [x] [Invites API](https://www.hipchat.com/docs/apiv2/method/invite_user_to_group)
+- [ ] [Oauth Sessions API](https://www.hipchat.com/docs/apiv2/method/get_session)
+- [x] ~~Prefs Public API~~ (Included under Users API)
+- [ ] [Rooms API](https://www.hipchat.com/docs/apiv2/method/get_all_rooms)
+- [ ] [Users API](https://www.hipchat.com/docs/apiv2/method/get_all_users)
+
 # License
 
 MIT
