@@ -16,6 +16,8 @@ Mostly I am constructing API spec YAML using online [Swagger Editor](http://edit
 # Policy
 
 - Meant to be used in generating client libraries.
+    - Some strings are slightly altered for easier programmatic manipulations, like camelize or underscore.
+    - e.g. "OAuth" -> "Oauth"
 - Not all of API aspects are covered. Especially, many schema information are purposefully omitted.
     - Simply lacking efforts on my side. HipChat API docs are large and fine-grained.
     - Intending to rely on HipChat cloud/server's request validations, so that always latest and accurate validations can be applied.
