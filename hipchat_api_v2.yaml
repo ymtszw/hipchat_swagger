@@ -243,6 +243,145 @@ paths:
           description: Group statistics
           schema:
             type: object
+  # Integration API
+  /addon/link:
+    post:
+      summary: Create integration link
+      description: https://www.hipchat.com/docs/apiv2/method/create_integration_link
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            required:
+              - target
+              - ttl
+            properties:
+              target:
+                type: string
+              ttl:
+                type: integer
+      tags:
+        - Integrations
+      responses:
+        200:
+          description: Integration link created
+          schema:
+            type: object
+  /addon/link/{token}:
+    delete:
+      summary: Delete integration link
+      description: https://www.hipchat.com/docs/apiv2/method/delete_integration_link
+      parameters:
+        - name: token
+          in: path
+          type: string
+          required: true
+      tags:
+        - Integrations
+      responses:
+        204:
+          description: Integration link deleted
+  /addon/ui:
+    post:
+      summary: Addon UI update
+      description: https://www.hipchat.com/docs/apiv2/method/addon_ui_update
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            required:
+              - glance
+            properties:
+              glance:
+                type: array
+                items:
+                  type: object
+      tags:
+        - Integrations
+      responses:
+        204:
+          description: Addon UI updated
+  /addon/ui/room/{room_id_or_name}:
+    post:
+      summary: Room Addon UI update
+      description: https://www.hipchat.com/docs/apiv2/method/room_addon_ui_update
+      parameters:
+        - name: room_id_or_name
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          required: true
+          schema:
+            required:
+              - glance
+            properties:
+              glance:
+                type: array
+                items:
+                  type: object
+      tags:
+        - Integrations
+      responses:
+        204:
+          description: Room Addon UI updated
+  /addon/ui/room/{room_id_or_name}/user/{user_id_or_email}:
+    post:
+      summary: User in Room Addon UI update
+      description: https://www.hipchat.com/docs/apiv2/method/user_in_room_addon_ui_update
+      parameters:
+        - name: room_id_or_name
+          in: path
+          type: string
+          required: true
+        - name: user_id_or_email
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          required: true
+          schema:
+            required:
+              - glance
+            properties:
+              glance:
+                type: array
+                items:
+                  type: object
+      tags:
+        - Integrations
+      responses:
+        204:
+          description: User in Room Addon UI updated
+  /addon/ui/user/{user_id_or_email}:
+    post:
+      summary: User Addon UI update
+      description: https://www.hipchat.com/docs/apiv2/method/user_addon_ui_update
+      parameters:
+        - name: user_id_or_email
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          required: true
+          schema:
+            required:
+              - glance
+            properties:
+              glance:
+                type: array
+                items:
+                  type: object
+      tags:
+        - Integrations
+      responses:
+        204:
+          description: User Addon UI updated
   # Invites API
   /invite/user:
     post:

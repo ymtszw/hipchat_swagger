@@ -18,6 +18,7 @@ Mostly I am constructing API spec YAML using online [Swagger Editor](http://edit
 - Meant to be used in generating client libraries.
     - Some strings are slightly altered for easier programmatic manipulations, like camelize or underscore.
     - e.g. "OAuth" -> "Oauth"
+- Cover APIs used in server side only.
 - Not all of API aspects are covered. Especially, many schema information are purposefully omitted.
     - Simply lacking efforts on my side. HipChat API docs are large and fine-grained.
     - Intending to rely on HipChat cloud/server's request validations, so that always latest and accurate validations can be applied.
@@ -39,7 +40,12 @@ Mostly I am constructing API spec YAML using online [Swagger Editor](http://edit
 - [x] [Emoticons API](https://www.hipchat.com/docs/apiv2/method/get_emoticon)
 - [ ] [Extensions API](https://www.hipchat.com/docs/apiv2/method/get_global_action)
 - [x] [Groups API](https://www.hipchat.com/docs/apiv2/method/view_group)
-- [ ] [Integrations API](https://www.hipchat.com/docs/apiv2/method/get_integration_installable_data)
+- [x] [Integrations API](https://www.hipchat.com/docs/apiv2/method/get_integration_installable_data)
+    - [Get integration installable data API](https://www.hipchat.com/docs/apiv2/method/get_integration_installable_data) is omitted,
+      since it is only used in installation flow, and the whole URL is sent to Add-on server upon installation.
+      Just use that URL as-is, seems easier than extracting `integration_id_or_key` and `token` from it and supplying them to library function.
+    - [Invoke integration link API](https://www.hipchat.com/docs/apiv2/method/invoke_integration_link)
+      is omitted, since it is for client side use.
 - [x] [Invites API](https://www.hipchat.com/docs/apiv2/method/invite_user_to_group)
 - [x] [Oauth Sessions API](https://www.hipchat.com/docs/apiv2/method/get_session)
 - [x] ~~Prefs Public API~~ (Included under Users API)
