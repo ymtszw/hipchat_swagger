@@ -540,7 +540,7 @@ paths:
           in: query
           type: boolean
           required: false
-        - name: include-deleted
+        - name: include-deleted # XXX Hyphen?
           in: query
           type: boolean
           required: false
@@ -551,3 +551,242 @@ paths:
           description: All users
           schema:
             type: object
+    post:
+      summary: Create user
+      description: https://www.hipchat.com/docs/apiv2/method/create_user
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            required:
+              - name
+              - email
+            properties:
+              name:
+                type: string
+              roles:
+                type: array
+                items:
+                  type: string
+              title:
+                type: string
+              mention_name:
+                type: string
+              is_group_admin:
+                type: boolean
+              timezone:
+                type: string
+              password:
+                type: string
+              email:
+                type: string
+      tags:
+        - Users
+      responses:
+        201:
+          description: User created
+          schema:
+            type: object
+  /user/{id_or_email}:
+    get:
+      summary: Get user # `View user` in the doc
+      description: https://www.hipchat.com/docs/apiv2/method/view_user
+      parameters:
+        - name: id_or_email
+          in: path
+          type: string
+          required: true
+      tags:
+        - Users
+      responses:
+        200:
+          description: User
+          schema:
+            type: object
+    put:
+      summary: Update user
+      description: https://www.hipchat.com/docs/apiv2/method/update_user
+      parameters:
+        - name: id_or_email
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          required: true
+          schema:
+            required:
+              - name
+              - mention_name
+              - email
+            properties:
+              name:
+                type: string
+              roles:
+                type: array
+                items:
+                  type: string
+              title:
+                type: string
+              presence:
+                type: object
+              mention_name:
+                type: string
+              is_group_admin:
+                type: boolean
+              timezone:
+                type: string
+              password:
+                type: string
+              email:
+                type: string
+      tags:
+        - Users
+      responses:
+        204:
+          description: User updated
+    delete:
+      summary: Delete user # `View user` in the doc
+      description: https://www.hipchat.com/docs/apiv2/method/delete_user
+      parameters:
+        - name: id_or_email
+          in: path
+          type: string
+          required: true
+      tags:
+        - Users
+      responses:
+        204:
+          description: User deleted
+  /user/{id_or_email}/history:
+    get:
+      summary: Get privatechat history # `View privatechat history` in the doc
+      description: https://www.hipchat.com/docs/apiv2/method/view_privatechat_history
+      parameters:
+        - name: id_or_email
+          in: path
+          type: string
+          required: true
+        - name: start-index
+          in: query
+          type: integer
+          required: false
+        - name: max-results
+          in: query
+          type: integer
+          required: false
+        - name: include_deleted # XXX Underscore?
+          in: query
+          type: boolean
+          required: false
+        - name: reverse
+          in: query
+          type: boolean
+          required: false
+        - name: date
+          in: query
+          type: string
+          required: false
+        - name: timezone
+          in: query
+          type: string
+          required: false
+        - name: end-date
+          in: query
+          type: string
+          required: false
+      tags:
+        - Users
+      responses:
+        200:
+          description: Privatechat history
+          schema:
+            type: object
+  /user/{id_or_email}/history/latest:
+    get:
+      summary: Get recent privatechat history # `View recent privatechat history` in the doc
+      description: https://www.hipchat.com/docs/apiv2/method/view_recent_privatechat_history
+      parameters:
+        - name: id_or_email
+          in: path
+          type: string
+          required: true
+        - name: max-results
+          in: query
+          type: integer
+          required: false
+        - name: include_deleted # XXX Underscore?
+          in: query
+          type: boolean
+          required: false
+        - name: timezone
+          in: query
+          type: string
+          required: false
+        - name: not-before
+          in: query
+          type: string
+          required: false
+      tags:
+        - Users
+      responses:
+        200:
+          description: Recent privatechat history
+          schema:
+            type: object
+  /user/{id_or_email}/history/{message_id}:
+    get:
+      summary: Get privatechat message
+      description: https://www.hipchat.com/docs/apiv2/method/get_privatechat_message
+      parameters:
+        - name: id_or_email
+          in: path
+          type: string
+          required: true
+        - name: message_id
+          in: path
+          type: string
+          required: true
+        - name: include_deleted # XXX Underscore?
+          in: query
+          type: boolean
+          required: false
+        - name: timezone
+          in: query
+          type: string
+          required: false
+      tags:
+        - Users
+      responses:
+        200:
+          description: Privatechat message
+          schema:
+            type: object
+  /user/{id_or_email}/message:
+    post:
+      summary: Send privatechat message # `Private message user` in the doc
+      description: https://www.hipchat.com/docs/apiv2/method/private_message_user
+      parameters:
+        - name: id_or_email
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          required: true
+          schema:
+            required:
+              - message
+            properties:
+              message:
+                type: string
+              notify:
+                type: boolean
+              message_format:
+                type: string
+      tags:
+        - Users
+      responses:
+        204:
+          description: Privatechat message sent
