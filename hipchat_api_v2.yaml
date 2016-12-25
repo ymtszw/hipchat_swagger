@@ -790,3 +790,109 @@ paths:
       responses:
         204:
           description: Privatechat message sent
+  /user/{id_or_email}/photo/{size}:
+    get:
+      summary: Get photo
+      description: https://www.hipchat.com/docs/apiv2/method/get_photo
+      parameters:
+        - name: id_or_email
+          in: path
+          type: string
+          required: true
+        - name: size
+          in: path
+          type: string
+          enum:
+            - small
+            - big
+          required: true
+      tags:
+        - Users
+      responses:
+        302:
+          description: Redirect to photo
+  /user/{id_or_email}/photo:
+    put:
+      summary: Update photo
+      description: https://www.hipchat.com/docs/apiv2/method/update_photo
+      parameters:
+        - name: id_or_email
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          required: true
+          schema:
+            required:
+              - photo
+            properties:
+              photo:
+                type: string
+      tags:
+        - Users
+      responses:
+        204:
+          description: Photo updated
+    delete:
+      summary: Delete photo
+      description: https://www.hipchat.com/docs/apiv2/method/delete_photo
+      parameters:
+        - name: id_or_email
+          in: path
+          type: string
+          required: true
+      tags:
+        - Users
+      responses:
+        204:
+          description: Photo deleted
+  /user/{id_or_email}/preference/auto-join:
+    get:
+      summary: Get auto join rooms
+      description: https://www.hipchat.com/docs/apiv2/method/get_auto_join_rooms
+      parameters:
+        - name: id_or_email
+          in: path
+          type: string
+          required: true
+        - name: start-index
+          in: query
+          type: integer
+          required: false
+        - name: max-results
+          in: query
+          type: integer
+          required: false
+      tags:
+        - Users
+      responses:
+        200:
+          description: Auto join rooms
+          schema:
+            type: object
+  /user/{id_or_email}/share/link:
+    post:
+      summary: Share link with user
+      description: https://www.hipchat.com/docs/apiv2/method/share_link_with_user
+      parameters:
+        - name: id_or_email
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          required: true
+          schema:
+            required:
+              - link
+            properties:
+              message:
+                type: string
+              link:
+                type: string
+      tags:
+        - Users
+      responses:
+        204:
+          description: Link shared with user

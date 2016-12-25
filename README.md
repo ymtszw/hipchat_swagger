@@ -50,7 +50,9 @@ Mostly I am constructing API spec YAML using online [Swagger Editor](http://edit
 - [x] [Oauth Sessions API](https://www.hipchat.com/docs/apiv2/method/get_session)
 - [x] ~~Prefs Public API~~ (Included under Users API)
 - [ ] [Rooms API](https://www.hipchat.com/docs/apiv2/method/get_all_rooms)
-- [ ] [Users API](https://www.hipchat.com/docs/apiv2/method/get_all_users)
+- [x] [Users API](https://www.hipchat.com/docs/apiv2/method/get_all_users)
+    - [Share file with user API](https://www.hipchat.com/docs/apiv2/method/share_file_with_user) is omitted,
+      since it requires requests with [Multipart/Related](https://tools.ietf.org/html/rfc2387) content-type.
 
 # License
 
