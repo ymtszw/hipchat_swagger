@@ -486,6 +486,135 @@ paths:
           schema:
             type: object
   # Rooms API
+  /room:
+    get:
+      summary: Get all rooms
+      description: https://www.hipchat.com/docs/apiv2/method/get_all_rooms
+      parameters:
+        - name: start-index
+          in: query
+          type: integer
+          required: false
+        - name: max-results
+          in: query
+          type: integer
+          required: false
+        - name: include-private
+          in: query
+          type: boolean
+          required: false
+        - name: include-archived
+          in: query
+          type: boolean
+          required: true
+      tags:
+        - Rooms
+      responses:
+        200:
+          description: All rooms
+          schema:
+            type: object
+    post:
+      summary: Create room
+      description: https://www.hipchat.com/docs/apiv2/method/create_room
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            required:
+              - name
+            properties:
+              name:
+                type: string
+              privacy:
+                type: string
+                enum:
+                  - public
+                  - private
+              delegate_admin_visibility:
+                type: boolean
+              topic:
+                type: string
+              owner_user_id:
+                type: string
+              guest_access:
+                type: boolean
+      tags:
+        - Rooms
+      responses:
+        201:
+          description: Room created
+          schema:
+            type: object
+  /room/{room_id_or_name}:
+    get:
+      summary: Get room
+      description: https://www.hipchat.com/docs/apiv2/method/get_room
+      parameters:
+        - name: room_id_or_name
+          in: path
+          type: string
+          required: true
+      tags:
+        - Rooms
+      responses:
+        200:
+          description: Room
+          schema:
+            type: object
+    put:
+      summary: Update room
+      description: https://www.hipchat.com/docs/apiv2/method/update_room
+      parameters:
+        - name: room_id_or_name
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          required: true
+          schema:
+            required:
+              - name
+              - privacy
+              - is_archived
+              - is_guest_accessible
+              - topic
+              - owner
+            properties:
+              name:
+                type: string
+              privacy:
+                type: string
+              is_archived:
+                type: boolean
+              is_guest_accessible:
+                type: boolean
+              topic:
+                type: string
+              owner:
+                type: object
+              delegate_admin_visibility:
+                type: boolean
+      tags:
+        - Rooms
+      responses:
+        204:
+          description: Room updated
+    delete:
+      summary: Delete room
+      description: https://www.hipchat.com/docs/apiv2/method/delete_room
+      parameters:
+        - name: room_id_or_name
+          in: path
+          type: string
+          required: true
+      tags:
+        - Rooms
+      responses:
+        204:
+          description: Room deleted
   /room/{room_id_or_name}/notification:
     post:
       summary: Send room notification
