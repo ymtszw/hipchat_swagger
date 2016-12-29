@@ -615,6 +615,135 @@ paths:
       responses:
         204:
           description: Room deleted
+  /room/{room_id_or_name}/avatar:
+    get:
+      summary: Get room avatar
+      description: https://www.hipchat.com/docs/apiv2/method/get_room_avatar
+      parameters:
+        - name: room_id_or_name
+          in: path
+          type: string
+          required: true
+      tags:
+        - Rooms
+      responses:
+        304:
+          description: Room avatar
+    put:
+      summary: Update room avatar
+      description: https://www.hipchat.com/docs/apiv2/method/update_room_avatar
+      parameters:
+        - name: room_id_or_name
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          required: true
+          schema:
+            required:
+              - avatar
+            properties:
+              avatar:
+                type: string
+      tags:
+        - Rooms
+      responses:
+        204:
+          description: Room avatar updated
+    delete:
+      summary: Delete room avatar
+      description: https://www.hipchat.com/docs/apiv2/method/delete_room_avatar
+      parameters:
+        - name: room_id_or_name
+          in: path
+          type: string
+          required: true
+      tags:
+        - Rooms
+      responses:
+        204:
+          description: Group avatar deleted
+  /room/{room_id_or_name}/extension/action/{key}:
+    get:
+      summary: Get room action
+      description: https://www.hipchat.com/docs/apiv2/method/get_room_action
+      parameters:
+        - name: room_id_or_name
+          in: path
+          type: string
+          required: true
+        - name: key
+          in: path
+          type: string
+          required: true
+      tags:
+        - Rooms
+      responses:
+        200:
+          description: Room action
+          schema:
+            type: object
+    put:
+      summary: Create room action
+      description: https://www.hipchat.com/docs/apiv2/method/create_room_action
+      parameters:
+        - name: room_id_or_name
+          in: path
+          type: string
+          required: true
+        - name: key
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          required: true
+          schema:
+            required:
+              - target
+              - location
+              - key
+              - name
+            properties:
+              target:
+                type: object
+              weight:
+                type: integer
+              location:
+                type: string
+              key:
+                type: string
+              conditions:
+                type: array
+                items:
+                  type: object
+              name:
+                type: object
+      tags:
+        - Rooms
+      responses:
+        201:
+          description: Room action created
+          schema:
+            type: object
+    delete:
+      summary: Delete room action
+      description: https://www.hipchat.com/docs/apiv2/method/delete_room_action
+      parameters:
+        - name: room_id_or_name
+          in: path
+          type: string
+          required: true
+        - name: key
+          in: path
+          type: string
+          required: true
+      tags:
+        - Rooms
+      responses:
+        204:
+          description: Room action deleted
   /room/{room_id_or_name}/notification:
     post:
       summary: Send room notification
