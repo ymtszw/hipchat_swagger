@@ -8,6 +8,8 @@ Using [Swagger (currently OpenAPI) specification 2.0](https://github.com/OAI/Ope
 
 Currently in development. Gradually hand-exported from [official HipChat API documentations](https://www.hipchat.com/docs/apiv2).
 
+APIs other than extension related ones are mostly included already.
+
 My intention is to use this Swagger interpreted API specs to generate HipChat client library
 for languages I am using (especially [Elixir](http://elixir-lang.org/)).
 
@@ -50,6 +52,8 @@ Mostly I am constructing API spec YAML using online [Swagger Editor](http://edit
 - [x] [Oauth Sessions API](https://www.hipchat.com/docs/apiv2/method/get_session)
 - [x] ~~Prefs Public API~~ (Included under Users API)
 - [ ] [Rooms API](https://www.hipchat.com/docs/apiv2/method/get_all_rooms)
+    - [Share file with room API](https://www.hipchat.com/docs/apiv2/method/share_file_with_room) is omitted,
+      since it requires requests with [Multipart/Related](https://tools.ietf.org/html/rfc2387) content-type.
 - [x] [Users API](https://www.hipchat.com/docs/apiv2/method/get_all_users)
     - [Share file with user API](https://www.hipchat.com/docs/apiv2/method/share_file_with_user) is omitted,
       since it requires requests with [Multipart/Related](https://tools.ietf.org/html/rfc2387) content-type.
