@@ -54,6 +54,8 @@ Mostly I am constructing API spec YAML using online [Swagger Editor](http://edit
 - [ ] [Rooms API](https://www.hipchat.com/docs/apiv2/method/get_all_rooms)
     - [Share file with room API](https://www.hipchat.com/docs/apiv2/method/share_file_with_room) is omitted,
       since it requires requests with [Multipart/Related](https://tools.ietf.org/html/rfc2387) content-type.
+    - [Set topic API](https://www.hipchat.com/docs/apiv2/method/set_topic) is omitted,
+      since it requires (though undocumented,) requires application/json content-type.
 - [x] [Users API](https://www.hipchat.com/docs/apiv2/method/get_all_users)
     - [Share file with user API](https://www.hipchat.com/docs/apiv2/method/share_file_with_user) is omitted,
       since it requires requests with [Multipart/Related](https://tools.ietf.org/html/rfc2387) content-type.

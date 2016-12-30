@@ -1097,29 +1097,6 @@ paths:
           description: Room statistics
           schema:
             type: object
-  /room/{room_id_or_name}/topic:
-    put:
-      summary: Set topic
-      description: https://www.hipchat.com/docs/apiv2/method/set_topic
-      parameters:
-        - name: room_id_or_name
-          in: path
-          type: string
-          required: true
-        - name: body
-          in: body
-          required: true
-          schema:
-            required:
-              - topic
-            properties:
-              topic:
-                type: string
-      tags:
-        - Rooms
-      responses:
-        204:
-          description: Topic set
   # Users API
   /user:
     get:
