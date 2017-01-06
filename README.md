@@ -23,6 +23,7 @@ Mostly I am constructing API spec YAML using online [Swagger Editor](http://edit
 - Cover APIs used in server side only.
 - Not all of API aspects are covered. Especially, many schema information are purposefully omitted.
     - Simply lacking efforts on my side. HipChat API docs are large and fine-grained.
+    - Some APIs are omitted for simplified code generation; e.g. APIs requiring specific content-types.
     - Intending to rely on HipChat cloud/server's request validations, so that always latest and accurate validations can be applied.
         - If we try to apply client-side validations, we have to be very accurate about it,
           and must actively catch up on HipChat's API updates, which we cannot easily afford to.
@@ -53,12 +54,12 @@ Mostly I am constructing API spec YAML using online [Swagger Editor](http://edit
 - [x] ~~Prefs Public API~~ (Included under Users API)
 - [ ] [Rooms API](https://www.hipchat.com/docs/apiv2/method/get_all_rooms)
     - [Share file with room API](https://www.hipchat.com/docs/apiv2/method/share_file_with_room) is omitted,
-      since it requires requests with [Multipart/Related](https://tools.ietf.org/html/rfc2387) content-type.
+      since it requires requests with [`multipart/related`](https://tools.ietf.org/html/rfc2387) content-type.
     - [Set topic API](https://www.hipchat.com/docs/apiv2/method/set_topic) is omitted,
-      since it requires (though undocumented,) requires application/json content-type.
+      since it requires (though undocumented,) `application/json` content-type.
 - [x] [Users API](https://www.hipchat.com/docs/apiv2/method/get_all_users)
     - [Share file with user API](https://www.hipchat.com/docs/apiv2/method/share_file_with_user) is omitted,
-      since it requires requests with [Multipart/Related](https://tools.ietf.org/html/rfc2387) content-type.
+      since it requires requests with [`multipart/related`](https://tools.ietf.org/html/rfc2387) content-type.
 
 # License
 
