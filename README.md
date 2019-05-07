@@ -1,3 +1,9 @@
+# :warning: DISCONTINUATION NOTICE
+
+[HipChat itself is discontinued by Atlassian due to their partnership with Slack](https://www.atlassian.com/partnerships/slack).
+
+This Swagger specification file is therefore no longer maintained, and goes archive. Thanks for your interest, though! :heart:
+
 # hipchat_swagger
 
 HipChat API specifications written in [Swagger](http://swagger.io/) YAML.
